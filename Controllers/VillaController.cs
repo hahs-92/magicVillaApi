@@ -1,5 +1,8 @@
-﻿using MagicVilla_API.Models;
+﻿using MagicVilla_API.DTOs;
+using MagicVilla_API.FakeData;
+using MagicVilla_API.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MagicVilla_API.Controllers
@@ -9,13 +12,18 @@ namespace MagicVilla_API.Controllers
     public class VillaController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Villa> GetVillas()
+        public ActionResult<IEnumerable<VillaDTO>> GetVillas()
         {
-            return new List<Villa>
-            {
-                new Villa { Id=1, Name="Vista a la piscina"},
-                new Villa { Id=2, Name="Vista a la playa"},
-            };
+            return Ok(VillaStore.villas);
+        }
+
+        [HttpGet("id")]
+        public ActionResult<VillaDTO> GetVilla(int id)
+        {
+            if (id == 0) return BadRequest("id 0 is not allow¡");
+            var villaFounded = VillaStore.villas.FirstOrDefault(v => v.Id == id);
+            if (villaFounded == null) return NotFound("Villa not Found¡");      
+            return Ok(villaFounded);
         }
     }
 }
