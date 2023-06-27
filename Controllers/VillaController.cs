@@ -20,7 +20,7 @@ namespace MagicVilla_API.Controllers
             return Ok(VillaStore.villas);
         }
 
-        [HttpGet("id:int", Name = "GetVilla")]
+        [HttpGet("{id:int}", Name = "GetVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -52,6 +52,22 @@ namespace MagicVilla_API.Controllers
 
             VillaStore.villas.Add(villa);
             return CreatedAtRoute("GetVilla", new {id=villa.Id}, villa);
+        }
+
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        // utilizamos IActionResult porque no necesitamos devolver
+        // un modelo. Retornaremos un NoContent
+        public IActionResult DeleteVilla(int id) 
+        { 
+            if(id == 0) return BadRequest(ModelState);
+            var villaFounded = VillaStore.villas.FirstOrDefault(v =>v.Id == id);
+            if (villaFounded == null) return NotFound();
+            
+            VillaStore.villas.Remove(villaFounded);
+            return NoContent();
         }
     }
 }
