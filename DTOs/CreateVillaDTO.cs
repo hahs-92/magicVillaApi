@@ -7,6 +7,8 @@ namespace MagicVilla_API.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public double Price { get; set; }
         public int Area { get; set; }
     }
     public class CreateVillaDTO
@@ -20,6 +22,10 @@ namespace MagicVilla_API.DTOs
         [MaxLength(50)]
         public string Description { get; set; }
         [Required]
+        public string ImageUrl { get; set; }
+        [Required]
+        public double Price { get; set; }
+        [Required]
         public int Area { get; set; }
     }
 
@@ -29,6 +35,9 @@ namespace MagicVilla_API.DTOs
         public string Name { get; set; }
         [MaxLength(50)]
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public double Price { get; set; }
         public int Area { get; set; }
+
     }
 }
