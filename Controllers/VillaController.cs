@@ -12,14 +12,23 @@ namespace MagicVilla_API.Controllers
     [ApiController]
     public class VillaController : ControllerBase
     {
+        private readonly ILogger<VillaController> _logger;
+
+        public VillaController(ILogger<VillaController> logger) {
+            _logger= logger;
+        }
+
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<VillaDTO>> GetVillas()
         {
+            _logger.LogInformation("Getting all villas");
             return Ok(VillaStore.villas);
         }
+
 
         [HttpGet("{id:int}", Name = "GetVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -33,6 +42,7 @@ namespace MagicVilla_API.Controllers
             return Ok(villaFounded);
         }
 
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,6 +53,7 @@ namespace MagicVilla_API.Controllers
             //custom validation
             if(VillaStore.villas.FirstOrDefault(v => v.Name.ToLower() == villa.Name.ToLower()) != null)
             {
+                _logger.LogError("Name villa had already created¡");
                 ModelState.AddModelError("NameExisted", "Name villa had already created¡");
                 return BadRequest(ModelState);
             }
@@ -63,6 +74,7 @@ namespace MagicVilla_API.Controllers
             return CreatedAtRoute("GetVilla", new {id=newVilla.Id}, villa);
         }
 
+
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -78,6 +90,7 @@ namespace MagicVilla_API.Controllers
             VillaStore.villas.Remove(villaFounded);
             return NoContent();
         }
+
 
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
