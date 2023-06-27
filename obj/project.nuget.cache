@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "E4t3wiKTuXKHvFihg5hzpTdN9r9KrrNx6ChZJmuhxMi8AkB1urw4jkYUaGTlCJGQNSJypdoyyxECVwTm8vIfvQ==",
+  "dgSpecHash": "7QpQs5kaD/J5LoTY/G0t7ifshnbC/Vs+JrrZbCXuHJw8dCvFy/kHXP+nKJO875ESDVNh+pGN16n43taP4z+ETQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\hugo.hernandez\\Documents\\Projects\\C#\\MagicVilla\\MagicVilla_API\\MagicVilla_API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\hugo.hernandez\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\hugo.hernandez\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\hugo.hernandez\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\hugo.hernandez\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.8\\microsoft.aspnetcore.jsonpatch.7.0.8.nupkg.sha512",
     "C:\\Users\\hugo.hernandez\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.8\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.8.nupkg.sha512",

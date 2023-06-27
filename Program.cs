@@ -1,3 +1,4 @@
+using MagicVilla_API;
 using MagicVilla_API.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,11 +11,14 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// our services
+// our service for postgress
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("ApplicationDbContext"));
 });
+//our service for AutoMapper
+builder.Services.AddAutoMapper(typeof(MappingConfig));
+
 
 var app = builder.Build();
 
