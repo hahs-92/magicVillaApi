@@ -12,18 +12,39 @@ namespace MagicVilla_API.Controllers
     public class VillaController : ControllerBase
     {
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<VillaDTO>> GetVillas()
         {
             return Ok(VillaStore.villas);
         }
 
-        [HttpGet("id")]
+        [HttpGet("id:int", Name = "GetVilla")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<VillaDTO> GetVilla(int id)
         {
             if (id == 0) return BadRequest("id 0 is not allow¡");
             var villaFounded = VillaStore.villas.FirstOrDefault(v => v.Id == id);
             if (villaFounded == null) return NotFound("Villa not Found¡");      
             return Ok(villaFounded);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<VillaDTO> CreateVilla([FromBody] VillaDTO villa)
+        {
+            if(villa == null) return BadRequest();
+
+            villa.Id = VillaStore.villas
+                .OrderByDescending(v => v.Id)
+                .FirstOrDefault()!.Id + 1;
+
+            VillaStore.villas.Add(villa);
+            return CreatedAtRoute("GetVilla", new {id=villa.Id}, villa);
         }
     }
 }
