@@ -31,3 +31,7 @@ C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\obj\Debu
 C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\obj\Debug\net7.0\MagicVilla_API.pdb
 C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\obj\Debug\net7.0\MagicVilla_API.genruntimeconfig.cache
 C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\obj\Debug\net7.0\ref\MagicVilla_API.dll
+C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\hugo.hernandez\Documents\Projects\C#\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
