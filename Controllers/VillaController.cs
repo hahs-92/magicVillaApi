@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_API.Controllers
 {
@@ -130,15 +131,15 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<VillaDTO> UpdatePartialVilla(int id, JsonPatchDocument<VillaDTO> villa)
+        public ActionResult<string> UpdatePartialVilla(int id, JsonPatchDocument<UpdateVillaDTO> villa)
         {
             if (villa == null) return BadRequest();
-            var villaFounded = _db.Villas.FirstOrDefault(v => v.Id == id);
+            // AsNoTracking() se debe agregar para que EF, no le de seguimiento
+            var villaFounded = _db.Villas.AsNoTracking().FirstOrDefault(v => v.Id == id);
             if (villaFounded == null) return NotFound();
 
-            VillaDTO newVilla = new()
+            UpdateVillaDTO newVilla = new()
             {
-                Id= id,
                 Name = villaFounded.Name,
                 Description = villaFounded.Description,
                 ImageUrl = villaFounded.ImageUrl,
@@ -151,7 +152,7 @@ namespace MagicVilla_API.Controllers
 
             Villa villaModel = new()
             {
-                Id = newVilla.Id,
+                Id = id,
                 Name = newVilla.Name,
                 Description = newVilla.Description,
                 ImageUrl = newVilla.ImageUrl,
@@ -162,7 +163,7 @@ namespace MagicVilla_API.Controllers
             _db.Villas.Update(villaModel);
             _db.SaveChanges();
 
-            return Ok(villaFounded);
+            return Ok(villaModel.Id);
         }
     }
 }
