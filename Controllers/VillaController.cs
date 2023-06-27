@@ -37,7 +37,14 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<VillaDTO> CreateVilla([FromBody] VillaDTO villa)
         {
-            if(villa == null) return BadRequest();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+          
+            //custom validation
+            if(VillaStore.villas.FirstOrDefault(v => v.Name.ToLower() == villa.Name.ToLower()) != null)
+            {
+                ModelState.AddModelError("NameExisted", "Name villa had already created¡");
+                return BadRequest(ModelState);
+            }
 
             villa.Id = VillaStore.villas
                 .OrderByDescending(v => v.Id)
