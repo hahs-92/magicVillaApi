@@ -122,6 +122,8 @@ namespace MagicVilla_API.Controllers
                 }
 
                 Villa newVilla = _mapper.Map<Villa>(createDTO);
+                newVilla.CreatedAt= DateTime.Now;
+                newVilla.UpdatedAt= DateTime.Now;
 
                 //await _db.Villas.AddAsync(newVilla);
                 //await _db.SaveChangesAsync();
@@ -208,6 +210,7 @@ namespace MagicVilla_API.Controllers
 
                 Villa newVilla = _mapper.Map<Villa>(updateVillaDTO);
                 newVilla.Id = id;
+                newVilla.UpdatedAt= DateTime.Now;
                 //_db.Update(newVilla);
                 //await _db.SaveChangesAsync();
                 await _repo.Update(newVilla);
