@@ -22,6 +22,7 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 // our repository interface and implementation
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 
 
 var app = builder.Build();
